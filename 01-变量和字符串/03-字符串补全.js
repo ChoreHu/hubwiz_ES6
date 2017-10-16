@@ -1,0 +1,1 @@
+console.log('abc'.padEnd(10, "foo"));  // "abcfoofoof"
