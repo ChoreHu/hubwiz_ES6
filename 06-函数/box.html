@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .panel {
+            width: 300px;
+            height: 300px;
+            border: 2px solid gray;
+            position: relative;
+        }
+
+        .box {
+            position: absolute;
+            width: 98px;
+            height: 98px;
+            border: 1px solid black;
+            background: pink;
+            text-align: center;
+            line-height: 98px;
+        }
+
+        #box1 {
+            top: 0;
+            left: 0;
+        }
+
+        #box2 {
+            top: 0;
+            left: 100px;
+        }
+
+        #box3 {
+            top: 0;
+            left: 200px;
+        }
+
+        #box4 {
+            top: 100px;
+            left: 0;
+        }
+
+        #box5 {
+            top: 100px;
+            left: 100px;
+        }
+
+        #box6 {
+            top: 100px;
+            left: 200px;
+        }
+
+        #box7 {
+            top: 200px;
+            left: 0;
+        }
+
+        #box8 {
+            top: 200px;
+            left: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="panel" id="panel">
+        <div class="box" id="box1">1</div>
+        <div class="box" id="box2">2</div>
+        <div class="box" id="box3">3</div>
+        <div class="box" id="box4">4</div>
+        <div class="box" id="box5">5</div>
+        <div class="box" id="box6">6</div>
+        <div class="box" id="box7">7</div>
+        <div class="box" id="box8">8</div>
+    </div>
+    <script>
+        const BOX_HEIGHT = 100;
+        const BOX_WIDTH = 100;
+        const PANEL_COLUMNS_BOXES = 3;
+        const PANEL_ROWS_BOXES = 3;
+        //选取boxes数组
+        function getBoxes(panelId, boxClassName) {
+            let panel = document.getElementById(panelId);
+            return panel.getElementsByClassName(boxClassName);
+        }
+        //创建一个二维地图数组
+        function createMapArrays(cols, rows) {
+            let result = [];
+            for (let i = 0; i < rows; i++) {
+                let rowArr = [];
+                for (let j = 0; j < cols; j++) {
+                    let colArr = [];
+                    rowArr.push(colArr);
+                }
+                result.push(rowArr);
+            }
+            return result;
+        }
+        function judgmentBoxes(map, boxArr) {
+            for (let i = 0; i < boxArr.length; i++) {
+                let r = parseInt(getComputedStyle(boxArr[i], null)['top']) / BOX_HEIGHT;
+                let c = parseInt(getComputedStyle(boxArr[i], null)['left']) / BOX_WIDTH;
+                map[r][c] = boxArr[i];
+            }
+            console.log(map)
+            return map;
+        }
+        //可以移动的盒子数组
+        function canMoveBoxes(map, boxArr) {
+            let temp = true;
+            let canMoveBoxes = [];
+            for (var i = 0; i < map.length; i++) {
+                console.log(map[i].length);
+                for (let j = 0; map[i].length; j++) {
+                    if(!map[i][j]) console.log(i,j);
+                }
+            }
+            // if(temp) return canMoveBoxes.push(boxArr[5]);
+            console.log(canMoveBoxes);
+        }
+        function move() {
+            setInterval(function () {
+
+            }, 100)
+        }
+        let arr = getBoxes("panel", "box");
+        console.log(arr);
+        let map = judgmentBoxes(createMapArrays(PANEL_COLUMNS_BOXES, PANEL_ROWS_BOXES), getBoxes("panel", "box"));
+        canMoveBoxes(map, arr);
+    </script>
+</body>
+
+</html>
